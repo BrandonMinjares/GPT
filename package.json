@@ -1,0 +1,14 @@
+{
+  "name": "gptmovies",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start-backend": "cd backend && npm start",
+    "start-frontend": "cd frontend && npm start",
+    "start": "(npm run start-backend) & (npm run start-frontend)",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brandon Minjares",
+  "license": "ISC"
+}
