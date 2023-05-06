@@ -1,6 +1,7 @@
 import { Box, Button, GridItem, Grid } from '@chakra-ui/react'
 import { Image} from '@chakra-ui/react'
 import { useState } from 'react';
+import MovieLogo from './../assets/film-reel-svgrepo-com.svg';
 
 const Room = () => {
     const [movieQuestions, setMovieQuestions] = useState([]);
@@ -50,7 +51,7 @@ const Room = () => {
   return (
     <Box>
     <Box bg='tomato' p='2vh' color='white'>
-        <Image alt="React Logo" style={{width: 45 }}/>
+    <Image src={MovieLogo} alt="React Logo" style={{width: 45 }}/>
         <Button color='black' onClick={createGame}>Start Game</Button>
     </Box>
     <Grid h='200px' templateRows='repeat(2, 1fr)' templateColumns='repeat(2, 1fr)'>
