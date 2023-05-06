@@ -10,10 +10,12 @@ const Room = () => {
 
 
     const createGame = async () => {
+      console.log(process.env)
+      console.log(process.env.REACT_APP_OPENAI_API_URL);
         const options =  {
           method: 'POST', 
           headers: {
-            'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+            'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -24,7 +26,7 @@ const Room = () => {
           })
         }
     
-        await fetch(`${import.meta.env.VITE_OPENAI_API_URL}`, options)
+        await fetch(`${process.env.REACT_APP_OPENAI_API_URL}`, options)
                                 .then(response => response.json())
                                 .then(data => {
                                     const results = data.choices[0].text.trim().split('\n');
