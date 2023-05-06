@@ -1,8 +1,6 @@
-import { Container, Box, Button, GridItem, Grid } from '@chakra-ui/react'
-import MovieLogo from './../assets/movie_reel.svg';
-import { Image, IconButton} from '@chakra-ui/react'
+import { Box, Button, GridItem, Grid } from '@chakra-ui/react'
+import { Image} from '@chakra-ui/react'
 import { useState } from 'react';
-import axios from 'axios';
 
 const Room = () => {
     const [movieQuestions, setMovieQuestions] = useState([]);
@@ -52,7 +50,7 @@ const Room = () => {
   return (
     <Box>
     <Box bg='tomato' p='2vh' color='white'>
-        <Image src={MovieLogo} alt="React Logo" style={{width: 45 }}/>
+        <Image alt="React Logo" style={{width: 45 }}/>
         <Button color='black' onClick={createGame}>Start Game</Button>
     </Box>
     <Grid h='200px' templateRows='repeat(2, 1fr)' templateColumns='repeat(2, 1fr)'>

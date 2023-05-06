@@ -1,6 +1,5 @@
 import { Button } from "@chakra-ui/react"
-import axios from 'axios';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 export default function StartGame() {
   const navigate = useNavigate();
