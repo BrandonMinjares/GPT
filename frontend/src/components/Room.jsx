@@ -1,11 +1,11 @@
-import { Box, Button, GridItem, Grid } from '@chakra-ui/react'
+import { Box, Button, GridItem, Grid, Text } from '@chakra-ui/react'
 import { Image} from '@chakra-ui/react'
 import MovieLogo from './../assets/film-reel-svgrepo-com.svg';
 import { useState } from 'react';
 
 const Room = () => {
   const [question, setQuestion] = useState('');
-  const [option, setOption] = useState('');
+  const [option, setOption] = useState([]);
   const [answer, setAnswer] = useState('');
 
 
@@ -39,13 +39,11 @@ const Room = () => {
                                   const question = matches[0].replace(/"/g, '');
 
                                   setQuestion(question)
-
-                                  const options = matches[1].replace(/"/g, '');
+                                  console.log(matches[1])
+                                  const options = matches[1].split(/"([^"]*)"/);
+                                  console.log(options)
                                   setOption(options)
-
-                                  const answer = matches[2].replace(/"/g, '');
-                                  console.log(answer)
-
+/*
 
                                   const optionArray = options.split(', ')
 
@@ -54,6 +52,7 @@ const Room = () => {
                                       setAnswer(optionArray[i])
                                     }
                                   }
+                                  */
                                 })
                                 .catch(error => console.log(error));
         }
@@ -66,10 +65,26 @@ const Room = () => {
         {answer}
     </Box>
     <Grid h='200px' templateRows='repeat(2, 1fr)' templateColumns='repeat(2, 1fr)'>
-        <GridItem colSpan={1} bg='purple.600'  height='50vh' width='50vw' border='1px' borderColor='gray.200'>A</GridItem>
-        <GridItem colSpan={1} bg='green.500'  height='50vh' width='50vw' border='1px' borderColor='gray.200'>B</GridItem>
-        <GridItem colSpan={1} bg='blue.500'  height='50vh' width='50vw' border='1px' borderColor='gray.200'>C</GridItem>
-        <GridItem colSpan={1} bg='yellow.400'  height='50vh' width='50vw' border='1px' borderColor='gray.200'>D</GridItem>
+        <GridItem colSpan={1} bg='purple.600'  height='50vh' width='50vw' border='1px' borderColor='gray.200'>
+          <Text fontSize={45} pos="relative" top="190" left="100" display='flex' color='white'>
+          {option[1]}
+          </Text>
+        </GridItem>
+        <GridItem colSpan={1} bg='green.500'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}>
+        <Text fontSize={45} pos="relative" top="190" left="100" display='flex' color='white'>
+          {option[3]}
+          </Text>
+        </GridItem>
+        <GridItem colSpan={1} bg='blue.500'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}>
+        <Text fontSize={45} pos="relative" top="190" left="100" display='flex' color='white'>
+          {option[5]}
+          </Text>
+        </GridItem>
+        <GridItem colSpan={1} bg='yellow.400'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}>
+        <Text fontSize={45} pos="relative" top="190" left="100" display='flex' color='white'>
+          {option[7]}
+          </Text>
+        </GridItem>
     </Grid>
     </Box>
   )
