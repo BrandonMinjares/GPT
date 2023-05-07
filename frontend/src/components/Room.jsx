@@ -14,6 +14,12 @@ const Room = () => {
   const [question, setQuestion] = useState('');
   const [option, setOption] = useState([]);
   const [answer, setAnswer] = useState('');
+  const [score, setScore] = useState(0);
+
+  const correctAnswer = () => {
+    setScore(score + 1)
+    createGame()
+  }
 
 
     const createGame = async () => {
@@ -72,29 +78,30 @@ const Room = () => {
         {buttonVisible && (
         <Button color='black' onClick={handleClick}>Start Game</Button>
         )}
-        {answer}
+    <Text fontSize={40} color='white'>Score: {score}</Text>
     </Box>
+    
     <Grid h='200px' templateRows='repeat(2, 1fr)' templateColumns='repeat(2, 1fr)'>
         <GridItem colSpan={1} bg='purple.600'  height='50vh' width='50vw' border='1px' borderColor='gray.200' 
-          onClick={() => option[1].substring(0, 1) === answer ? console.log('good') : console.log('bad')}>
+          onClick={() => option[1].substring(0, 1) === answer ? correctAnswer() : console.log('bad')}>
           <Text fontSize={45} color='white'>
           {option[1]}
           </Text>
         </GridItem>
         <GridItem colSpan={1} bg='green.500'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
-          onClick={() => option[3].substring(0, 1) === answer ? console.log('good') : console.log('bad')}>
+          onClick={() => option[3].substring(0, 1) === answer ? correctAnswer() : console.log('bad')}>
         <Text fontSize={45} color='white'>
           {option[3]}
           </Text>
         </GridItem>
         <GridItem colSpan={1} bg='blue.500'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
-          onClick={() => option[5].substring(0, 1) === answer ? console.log('good') : console.log('bad')}>
+          onClick={() => option[5].substring(0, 1) === answer ? correctAnswer() : console.log('bad')}>
         <Text fontSize={45} color='white'>
           {option[5]}
           </Text>
         </GridItem>
         <GridItem colSpan={1} bg='yellow.400'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
-            onClick={() => option[7].substring(0, 1) === answer ? console.log('good') : console.log('bad')}>
+            onClick={() => option[7].substring(0, 1) === answer ? correctAnswer() : console.log('bad')}>
         <Text fontSize={45} color='white'>
           {option[7]}
           </Text>
