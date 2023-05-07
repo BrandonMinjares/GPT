@@ -4,10 +4,16 @@ import MovieLogo from './../assets/film-reel-svgrepo-com.svg';
 import { useState } from 'react';
 
 const Room = () => {
+  const [buttonVisible, setButtonVisible] = useState(true);
+
+  const handleClick = () => {
+    setButtonVisible(false);
+    createGame();
+  };
+
   const [question, setQuestion] = useState('');
   const [option, setOption] = useState([]);
   const [answer, setAnswer] = useState('');
-
 
 
     const createGame = async () => {
@@ -60,28 +66,30 @@ const Room = () => {
     <Box>
     <Box bg='tomato' p='2vh' color='white'>
     <Image src={MovieLogo} alt="React Logo" style={{width: 45 }}/>
-        {question}
-        <Button color='black' onClick={createGame}>Start Game</Button>
+    <Text fontSize={46} color='white'>{question}</Text>
+        {buttonVisible && (
+        <Button color='black' onClick={handleClick}>Start Game</Button>
+        )}
         {answer}
     </Box>
     <Grid h='200px' templateRows='repeat(2, 1fr)' templateColumns='repeat(2, 1fr)'>
         <GridItem colSpan={1} bg='purple.600'  height='50vh' width='50vw' border='1px' borderColor='gray.200'>
-          <Text fontSize={45} pos="relative" top="190" left="100" display='flex' color='white'>
+          <Text fontSize={45} color='white'>
           {option[1]}
           </Text>
         </GridItem>
         <GridItem colSpan={1} bg='green.500'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}>
-        <Text fontSize={45} pos="relative" top="190" left="100" display='flex' color='white'>
+        <Text fontSize={45} color='white'>
           {option[3]}
           </Text>
         </GridItem>
         <GridItem colSpan={1} bg='blue.500'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}>
-        <Text fontSize={45} pos="relative" top="190" left="100" display='flex' color='white'>
+        <Text fontSize={45} color='white'>
           {option[5]}
           </Text>
         </GridItem>
         <GridItem colSpan={1} bg='yellow.400'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}>
-        <Text fontSize={45} pos="relative" top="190" left="100" display='flex' color='white'>
+        <Text fontSize={45} color='white'>
           {option[7]}
           </Text>
         </GridItem>
