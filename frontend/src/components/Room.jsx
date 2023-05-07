@@ -1,4 +1,4 @@
-import { Box, Button, GridItem, Grid, Text } from '@chakra-ui/react'
+import { Box, Button, GridItem, Grid, Text, Flex } from '@chakra-ui/react'
 import { Image} from '@chakra-ui/react'
 import MovieLogo from './../assets/film-reel-svgrepo-com.svg';
 import { useState } from 'react';
@@ -17,7 +17,13 @@ const Room = () => {
   const [score, setScore] = useState(0);
 
   const correctAnswer = () => {
+    alert('Correct!')
     setScore(score + 1)
+    createGame()
+  }
+
+  const incorrectAnswer = () => {
+    alert('inorrect!')
     createGame()
   }
 
@@ -32,7 +38,7 @@ const Room = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            prompt: 'Provide me with a hard movie trivia question in an array named questions, 4 unique answer options where 1 is correct and 3 are incorrect and they are labeled A, B, C, or D in an array named options. Then give me 1 correct answer labeled A, B, C, or D in an array named answers. Make each array name lowercase.  Each array should be using the notation "[]"',
+            prompt: 'Provide me with a movie trivia question in an array named questions, 4 unique answer options where 1  answer option is correct and 3  answer options are incorrect and they are labeled A, B, C, or D in an array named options. Then give me 1 correct  answer options labeled A, B, C, or D in an array named answers. Make each array name lowercase.  Each array should be using the notation "[]"',
             max_tokens: 4000,
             model: 'text-davinci-003',
             n: 1,
@@ -79,43 +85,47 @@ const Room = () => {
                                 .catch(error => console.log(error));
         }
   return (
-    <Box>
-    <Box bg='tomato' p='2vh' color='white'>
-    <Image src={MovieLogo} alt="React Logo" style={{width: 45 }}/>
-    <Text fontSize={46} color='white'>{question}</Text>
-        {buttonVisible && (
-        <Button color='black' onClick={handleClick}>Start Game</Button>
-        )}
-    <Text fontSize={40} color='white'>Score: {score}</Text>
-    </Box>
-    
-    <Grid h='200px' templateRows='repeat(2, 1fr)' templateColumns='repeat(2, 1fr)'>
-        <GridItem colSpan={1} bg='purple.600'  height='50vh' width='50vw' border='1px' borderColor='gray.200' 
-          onClick={() => option[1].substring(0, 1) === answer ? correctAnswer() : console.log('bad')}>
-          <Text fontSize={45} color='white'>
-          {option[1]}
-          </Text>
-        </GridItem>
-        <GridItem colSpan={1} bg='green.500'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
-          onClick={() => option[3].substring(0, 1) === answer ? correctAnswer() : console.log('bad')}>
-        <Text fontSize={45} color='white'>
-          {option[3]}
-          </Text>
-        </GridItem>
-        <GridItem colSpan={1} bg='blue.500'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
-          onClick={() => option[5].substring(0, 1) === answer ? correctAnswer() : console.log('bad')}>
-        <Text fontSize={45} color='white'>
-          {option[5]}
-          </Text>
-        </GridItem>
-        <GridItem colSpan={1} bg='yellow.400'  height='50vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
-            onClick={() => option[7].substring(0, 1) === answer ? correctAnswer() : console.log('bad')}>
-        <Text fontSize={45} color='white'>
-          {option[7]}
-          </Text>
-        </GridItem>
-    </Grid>
-    </Box>
+    <Flex bg='black'>
+      <Box maxHeight='100vh' bg='white'>
+        <Grid bg='tomato' p='3vh' templateColumns='repeat(5, 1fr)' color='white' alignItems="center" justifyContent="center">
+          <GridItem colSpan={1} ><Image src={MovieLogo} alt="React Logo" style={{width: 60, height: 60 }}/> </GridItem>
+          <GridItem colSpan={3}><Text fontSize={40} color='white'>{question}</Text>{buttonVisible && (
+            <Button color='black' width='10vw' onClick={handleClick}>Start Game</Button>
+            )}
+          </GridItem>
+          <GridItem colSpan={1} ><Text fontSize={40} color='white'>Score: {score}</Text></GridItem>
+        </Grid>
+        <Grid templateRows='repeat(2, 1fr)' templateColumns='repeat(2, 1fr)'>
+            <GridItem>
+              <Box colSpan={1} bg='purple.600'  height='45vh' width='50vw' border='1px' borderColor='gray.200' 
+              onClick={() => option[1].substring(0, 1) === answer ? correctAnswer() : incorrectAnswer()}>
+              <Text color='white' fontSize={50} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[1]}</Text>
+              </Box>
+            </GridItem>
+            <GridItem>
+              <Box colSpan={1} bg='green.500'  height='45vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
+                onClick={() => option[3].substring(0, 1) === answer ? correctAnswer() : incorrectAnswer()}>
+              <Text color='white' fontSize={50} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[3]}</Text>
+              </Box>
+
+            </GridItem>
+            <GridItem>
+              <Box colSpan={1} bg='blue.500'  height='45vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
+                onClick={() => option[3].substring(0, 1) === answer ? correctAnswer() : incorrectAnswer()}>
+              <Text color='white' fontSize={50} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[5]}</Text>
+              </Box>
+
+            </GridItem>
+            <GridItem>
+              <Box  colSpan={1} bg='yellow.400'  height='45vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
+                onClick={() => option[3].substring(0, 1) === answer ? correctAnswer() : incorrectAnswer()}>
+              <Text color='white' fontSize={50} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[7]}</Text>
+              </Box>
+
+            </GridItem>
+        </Grid>
+      </Box>
+      </Flex>
   )
 }
 
