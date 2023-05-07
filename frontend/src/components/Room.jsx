@@ -32,7 +32,7 @@ const Room = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            prompt: 'Provide me with 1 movie trivia question in an array named questions, 4 unique answer options labeled A, B, C, or D in an array named options, and then 1 correct answer labeled A, B, C, or D in an array named answers. Make each array name lowercase.  Each array should be using the notation "[]"',
+            prompt: 'Provide me with a hard movie trivia question in an array named questions, 4 unique answer options where 1 is correct and 3 are incorrect and they are labeled A, B, C, or D in an array named options. Then give me 1 correct answer labeled A, B, C, or D in an array named answers. Make each array name lowercase.  Each array should be using the notation "[]"',
             max_tokens: 4000,
             model: 'text-davinci-003',
             n: 1,
@@ -48,15 +48,23 @@ const Room = () => {
                                   const regex = /\[(.*?)\]/g;
                                   const matches = [...result.matchAll(regex)].map(match => match[1]);
                                   console.log(matches);
-                                  const question = matches[0].replace(/"/g, '');
+                                  console.log('matches length' + matches.length)
+                                  if (matches.length !== 3) {
+                                    createGame();
+                                  } else {
+                                    const question = matches[0].replace(/"/g, '');
 
-                                  setQuestion(question)
-                                  console.log(matches[1])
-                                  const options = matches[1].split(/"([^"]*)"/);
-                                  console.log(options)
-                                  setOption(options)
+                                    setQuestion(question)
+                                    console.log(matches[1])
+                                    const options = matches[1].split(/"([^"]*)"/);
+                                    console.log(options)
+                                    console.log('answer option length' + options.length)
+                                    setOption(options)
 
-                                  setAnswer(matches[2][1])
+                                    const answer = (matches[2][1]).toUpperCase();
+                                    setAnswer(answer)
+                                  }
+
 /*
 
                                   const optionArray = options.split(', ')
