@@ -1,12 +1,9 @@
 import { Box, Button, GridItem, Grid } from '@chakra-ui/react'
 import { Image} from '@chakra-ui/react'
-import { useState } from 'react';
 import MovieLogo from './../assets/film-reel-svgrepo-com.svg';
 
 const Room = () => {
-    const [movieQuestions, setMovieQuestions] = useState([]);
-    const [movieAnswerOptions, setMovieAnswerOptions] = useState([]);
-    const [movieCorrectAnswers, setMovieCorrectAnswers] = useState([]);
+
 
 
     const createGame = async () => {
@@ -29,24 +26,18 @@ const Room = () => {
         await fetch(`${process.env.REACT_APP_OPENAI_API_URL}`, options)
                                 .then(response => response.json())
                                 .then(data => {
-                                    const results = data.choices[0].text.trim().split('\n');
-                                    console.log(results);
-                                    const questions = [];
-                                    const answerOptions = [];
-                                    const correctAnswers = [];
-                                    
-                                    for (let i = 0; i < results.length; i += 4) {
-                                      questions.push(results[i]);
-                                      answerOptions.push([results[i], results[i + 1], results[i + 2], results[i + 3]]);
-                                      correctAnswers.push(results[i]);
-                                    }
-                                    setMovieQuestions(questions);
-                                    setMovieAnswerOptions(answerOptions);
-                                    setMovieCorrectAnswers(correctAnswers);
+                                    console.log(data);
+                                    const answersString = data.choices[0].text.trim();
 
-                                    console.log(movieQuestions);
-                                    console.log(movieAnswerOptions);
-                                    console.log(movieCorrectAnswers);
+                                    const answers = answersString.split("\n\n");
+                                    console.log(answers);
+                                    
+                                    /*
+                                    const [questionsArray, answerOptionsArray, correctAnswersArray] = data.choices[0].text.trim().split(/\n\n(.*?)(?=\[)/).slice(1);
+                                    console.log(questionsArray);
+                                    console.log(answerOptionsArray);
+                                    console.log(correctAnswersArray);
+                                    */
                                 })
                                 .catch(error => console.log(error));
         }
