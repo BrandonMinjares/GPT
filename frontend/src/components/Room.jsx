@@ -32,8 +32,8 @@ const Room = () => {
 
     const createGame = async () => {
       
-      console.log(process.env)
-      console.log(process.env.REACT_APP_OPENAI_API_URL);
+      // console.log(process.env)
+      // console.log(process.env.REACT_APP_OPENAI_API_URL);
         const options =  {
           method: 'POST', 
           headers: {
@@ -51,23 +51,23 @@ const Room = () => {
         await fetch(`${process.env.REACT_APP_OPENAI_API_URL}`, options)
                                 .then(response => response.json())
                                 .then(data => {
-                                  console.log(data);
+                                  // console.log(data);
                                   const result = data.choices[0].text;
-                                  console.log(result);
+                                  // console.log(result);
                                   const regex = /\[(.*?)\]/g;
                                   const matches = [...result.matchAll(regex)].map(match => match[1]);
-                                  console.log(matches);
-                                  console.log('matches length' + matches.length)
+                                  // console.log(matches);
+                                  // console.log('matches length' + matches.length)
                                   if (matches.length !== 3) {
                                     createGame();
                                   } else {
                                     const question = matches[0].replace(/"/g, '');
 
                                     setQuestion(question)
-                                    console.log(matches[1])
+                                    // console.log(matches[1])
                                     const options = matches[1].split(/"([^"]*)"/);
-                                    console.log(options)
-                                    console.log('answer option length' + options.length)
+                                    // console.log(options)
+                                    // console.log('answer option length' + options.length)
                                     setOption(options)
 
                                     const answer = (matches[2][1]).toUpperCase();
@@ -92,7 +92,8 @@ const Room = () => {
       <Box maxHeight='100vh' bg='white'>
         <Grid bg='tomato' p='3vh' templateColumns='repeat(5, 1fr)' color='white' alignItems="center" justifyContent="center">
           <GridItem colSpan={1} ><Image src={MovieLogo} alt="React Logo" style={{width: 60, height: 60, paddingLeft: 1}}/> </GridItem>
-          <GridItem colSpan={3}><Text fontSize={40} color='white'>{question}</Text>{buttonVisible && (
+          <GridItem colSpan={3}><Text fontSize={40} color='white'>{question}</Text>
+          {buttonVisible && (
             <Button color='white' width='22vw' onClick={handleClick}><Text fontSize={20} color='black'>Start Game</Text></Button>
             )}
           </GridItem>
@@ -102,27 +103,27 @@ const Room = () => {
             <GridItem>
               <Box colSpan={1} bg='purple.600'  height='45vh' width='50vw' border='1px' borderColor='gray.200' 
               onClick={() => option[1].substring(0, 1) === answer ? correctAnswer() : incorrectAnswer()}>
-              <Text color='white' fontSize={50} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[1]}</Text>
+              <Text color='white' fontSize={44} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[1]}</Text>
               </Box>
             </GridItem>
             <GridItem>
-              <Box colSpan={1} bg='green.500'  height='45vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
+              <Box colSpan={1} bg='green.500'  height='45vh' width='50vw' border='1px' borderColor='gray.200'
                 onClick={() => option[3].substring(0, 1) === answer ? correctAnswer() : incorrectAnswer()}>
-              <Text color='white' fontSize={50} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[3]}</Text>
+              <Text color='white' fontSize={44} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[3]}</Text>
               </Box>
 
             </GridItem>
             <GridItem>
               <Box colSpan={1} bg='blue.500'  height='45vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
                 onClick={() => option[3].substring(0, 1) === answer ? correctAnswer() : incorrectAnswer()}>
-              <Text color='white' fontSize={50} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[5]}</Text>
+              <Text color='white' fontSize={44} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[5]}</Text>
               </Box>
 
             </GridItem>
             <GridItem>
               <Box  colSpan={1} bg='yellow.400'  height='45vh' width='50vw' border='1px' borderColor='gray.200' fontSize={35}
                 onClick={() => option[3].substring(0, 1) === answer ? correctAnswer() : incorrectAnswer()}>
-              <Text color='white' fontSize={50} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[7]}</Text>
+              <Text color='white' fontSize={44} borderRadius="md" textAlign="center" display="flex" alignItems="center" justifyContent="center">{option[7]}</Text>
               </Box>
 
             </GridItem>
