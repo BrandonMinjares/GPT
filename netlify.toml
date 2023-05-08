@@ -7,4 +7,3 @@
     from = "/*"
     to = "/"
     status = 200
-    
