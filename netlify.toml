@@ -1,6 +1,6 @@
 [[redirects]]
     from = '/*'
-    to = '/Room'
+    to = '/index.html'
     status = 200
 
 [build]
