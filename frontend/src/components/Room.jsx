@@ -25,7 +25,7 @@ const Room = () => {
   }
 
   const incorrectAnswer = () => {
-    alert('inorrect!')
+    alert('Inorrect!')
     createGame()
   }
 
@@ -51,7 +51,7 @@ const Room = () => {
         await fetch(`${process.env.REACT_APP_OPENAI_API_URL}`, options)
                                 .then(response => response.json())
                                 .then(data => {
-                                  console.log(data);
+                                  // console.log(data);
                                   const result = data.choices[0].text;
                                   // console.log(result);
                                   const regex = /\[(.*?)\]/g;
