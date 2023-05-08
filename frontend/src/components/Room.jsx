@@ -5,9 +5,11 @@ import { useState } from 'react';
 
 const Room = () => {
   const [buttonVisible, setButtonVisible] = useState(true);
+  const [scoreVisible, setScoreVisible] = useState(false);
 
   const handleClick = () => {
     setButtonVisible(false);
+    setScoreVisible(true);
     createGame();
   };
 
@@ -29,6 +31,7 @@ const Room = () => {
 
 
     const createGame = async () => {
+      
       console.log(process.env)
       console.log(process.env.REACT_APP_OPENAI_API_URL);
         const options =  {
@@ -93,7 +96,7 @@ const Room = () => {
             <Button color='white' width='22vw' onClick={handleClick}><Text fontSize={20} color='black'>Start Game</Text></Button>
             )}
           </GridItem>
-          <GridItem colSpan={1} ><Text fontSize={40} color='white'>Score: {score}</Text></GridItem>
+          <GridItem colSpan={1} >{scoreVisible && (<Text fontSize={40} color='white'>Score: {score}</Text>)}</GridItem>
         </Grid>
         <Grid templateRows='repeat(2, 1fr)' templateColumns='repeat(2, 1fr)'>
             <GridItem>
