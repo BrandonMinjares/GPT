@@ -25,7 +25,7 @@ const Room = () => {
   }
 
   const incorrectAnswer = () => {
-    alert('Inorrect!')
+    alert('Incorrect!')
     createGame()
   }
 
