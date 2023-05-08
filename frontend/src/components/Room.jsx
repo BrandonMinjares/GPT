@@ -88,9 +88,9 @@ const Room = () => {
     <Flex bg='black'>
       <Box maxHeight='100vh' bg='white'>
         <Grid bg='tomato' p='3vh' templateColumns='repeat(5, 1fr)' color='white' alignItems="center" justifyContent="center">
-          <GridItem colSpan={1} ><Image src={MovieLogo} alt="React Logo" style={{width: 60, height: 60 }}/> </GridItem>
+          <GridItem colSpan={1} ><Image src={MovieLogo} alt="React Logo" style={{width: 60, height: 60, paddingLeft: 1}}/> </GridItem>
           <GridItem colSpan={3}><Text fontSize={40} color='white'>{question}</Text>{buttonVisible && (
-            <Button color='black' width='10vw' onClick={handleClick}>Start Game</Button>
+            <Button color='white' width='22vw' onClick={handleClick}><Text fontSize={20} color='black'>Start Game</Text></Button>
             )}
           </GridItem>
           <GridItem colSpan={1} ><Text fontSize={40} color='white'>Score: {score}</Text></GridItem>
